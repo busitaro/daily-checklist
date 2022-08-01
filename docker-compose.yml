@@ -1,0 +1,43 @@
+version: '3.8'
+services:
+  front:
+    build:
+      context: .
+      dockerfile: docker/vue/Dockerfile
+    volumes:
+      - ./front:/app
+      - daily-checklist-front:/app/node_modules
+    ports:
+      - 8080:8080
+    # command: yarn run serve
+    command: tail -f /dev/null
+    container_name: daily-checklist-front
+  # back:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/express/Dockerfile
+  #   volumes:
+  #     - ./back:/app
+  #   command: node app.js
+  #   container_name: daliy-checklist-back
+  # test:
+  #   image: curlimages/curl:7.83.1
+  #   command: tail -f /dev/null
+  #   container_name: daliy-checklist-test
+  # db:
+  #   build:
+  #     context: .
+  #     dockerfile: docker/mysql/Dockerfile
+  #   container_name: daily-checklist-db
+  #   ports:
+  #     - ${DB_PORT}:3306
+  #   environment:
+  #     - MYSQL_DATABASE=${DB_NAME}
+  #     - MYSQL_USER=${DB_USER}
+  #     - MYSQL_PASSWORD=${DB_PASSWORD}
+  #     - MYSQL_ROOT_PASSWORD=${DB_ROOT_PASSWORD}
+  #   volumes:
+  #     - daily-checklist-db:/var/lib/mysql
+volumes:
+  daily-checklist-front:
+  daily-checklist-db:
